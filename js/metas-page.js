@@ -1,9 +1,10 @@
 /**
  * FOCO — Página Definir metas (metas.html).
- * Mantém uma lista de metas em localStorage (foco-metas) e renderiza cards com ações.
+ * Mantém uma lista de metas em localStorage (foco-metas) e, quando o usuário está logado,
+ * sincroniza com a API (backend) para não depender de localhost nem apenas do navegador.
  * Avisos e confirmações são estilizados (toast e modais), sem window.alert/confirm/prompt.
  */
-(function () {
+(async function () {
   const METAS_KEY = "foco-metas";
   const LEGACY_KEY = "foco-meta";
 
@@ -25,11 +26,37 @@
   let toastTimeout = null;
 
   /**
+   * Backend: deteta token e base URL da API (mesma lógica de api.js, mas sem imports).
+   */
+  function getToken() {
+    try {
+      return localStorage.getItem("foco-token") || null;
+    } catch {
+      return null;
+    }
+  }
+
+  function getApiBase() {
+    if (typeof window === "undefined") return "";
+    if (window.FOCO_API_URL) return window.FOCO_API_URL;
+    if (window.location.port === "5500") return "http://localhost:3001";
+    return window.location.origin || "";
+  }
+
+  function metasAuthHeaders() {
+    const token = getToken();
+    return {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    };
+  }
+
+  /**
    * @typedef {{ id: string, text: string, done: boolean, createdAt: string }} MetaItem
    */
 
   /** @returns {MetaItem[]} */
-  function loadMetas() {
+  function loadMetasFromLocal() {
     try {
       const raw = localStorage.getItem(METAS_KEY);
       if (raw) {
@@ -47,7 +74,7 @@
             createdAt: new Date().toISOString(),
           },
         ];
-        saveMetas(metas);
+        saveMetasToLocal(metas);
         localStorage.removeItem(LEGACY_KEY);
         return metas;
       }
@@ -56,11 +83,55 @@
   }
 
   /** @param {MetaItem[]} metas */
-  function saveMetas(metas) {
+  function saveMetasToLocal(metas) {
     try {
       localStorage.setItem(METAS_KEY, JSON.stringify(metas));
       localStorage.removeItem(LEGACY_KEY);
     } catch (_) {}
+  }
+
+  /**
+   * Carrega metas: se houver token tenta API, senão usa apenas localStorage.
+   * Mesmo com falha na API mantém funcional no navegador.
+   * @returns {Promise<MetaItem[]>}
+   */
+  async function loadMetas() {
+    const token = getToken();
+    if (!token) {
+      return loadMetasFromLocal();
+    }
+
+    try {
+      const res = await fetch(`${getApiBase()}/api/metas`, {
+        method: "GET",
+        headers: metasAuthHeaders(),
+      });
+      if (!res.ok) throw new Error("Erro ao carregar metas");
+      const data = await res.json().catch(() => ({ items: [] }));
+      const items = Array.isArray(data.items) ? data.items : [];
+      saveMetasToLocal(items);
+      return items;
+    } catch (_) {
+      // Falha na API → continua funcional com os dados locais.
+      return loadMetasFromLocal();
+    }
+  }
+
+  /**
+   * Salva metas: sempre em localStorage e, se logado, também no backend.
+   * @param {MetaItem[]} metas
+   */
+  function saveMetas(metas) {
+    saveMetasToLocal(metas);
+    const token = getToken();
+    if (!token) return;
+
+    // Sincronização assíncrona, sem bloquear a UI.
+    fetch(`${getApiBase()}/api/metas`, {
+      method: "PUT",
+      headers: metasAuthHeaders(),
+      body: JSON.stringify({ items: metas }),
+    }).catch(() => {});
   }
 
   /**
@@ -240,7 +311,7 @@
     return div.innerHTML;
   }
 
-  let metas = loadMetas();
+  let metas = await loadMetas();
   renderMetas(metas);
 
   if (addBtn && input) {
