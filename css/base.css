@@ -14,10 +14,11 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Scroll fluido: apenas o body rola (evita “trancos” em blocos como metas/tabela) */
+  /* Scroll fluido: documento é o container de scroll, sem travar em “blocos” */
   overflow-x: hidden;
-  overflow-y: visible;
+  overflow-y: auto;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   /* Esconde barra de rolagem mantendo scroll funcional */
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -36,17 +37,23 @@ body {
   line-height: 1.5;
   position: relative;
   overflow-x: hidden;
-  /* Body é o container único de scroll vertical */
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  /* Scroll padrão; pode ser ajustado por página específica */
+  overflow-y: visible;
 }
 
-/* Páginas principais: reforça gesto de scroll vertical natural */
-body.page-app,
-body.page-metas,
+/* app.html: garante scroll vertical fluido, inclusive em mobile (touch) */
+body.page-app {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+/* Landing e páginas de conteúdo: mesmo comportamento de scroll seguro em mobile e desktop */
 body.page-landing,
 body.page-informacoes,
 body.page-sobre {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
 }
 

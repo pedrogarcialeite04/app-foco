@@ -29,6 +29,12 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
+
+  /* Texto das atividades mais natural: evita quebrar letra por letra em colunas estreitas */
+  .cell-label {
+    word-break: normal;
+    hyphens: auto;
+  }
 }
 
 /* ========== Base: scroll natural (vertical livre), sem blocos que travem ========== */
@@ -100,21 +106,21 @@ body {
     border-spacing: 0 var(--space-md);
   }
 
-  /* Proporções mobile: Atividade 20%, 7 dias 66%, Add 14% (touch ~44px em 320px) */
+  /* Proporções mobile: Atividade 26%, 7 dias 62%, Add 12% (texto deitado sem quebrar demais) */
   .sheet th:first-child,
   .sheet td:first-child {
-    width: 20%;
+    width: 26%;
   }
   .sheet th:last-child,
   .sheet td:last-child {
-    width: 14%;
+    width: 12%;
     padding-left: var(--space-xs);
     padding-right: var(--space-xs);
     box-sizing: border-box;
   }
   .sheet th:not(:first-child):not(:last-child),
   .sheet td:not(:first-child):not(:last-child) {
-    width: calc(66% / 7);
+    width: calc(62% / 7);
   }
 
   .sheet thead th.cell-add-col {
