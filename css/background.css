@@ -36,12 +36,13 @@
   position: absolute;
   inset: 0;
   z-index: 1;
+  /* Overlay um pouco mais escuro para aumentar o contraste do texto em metas/tabela */
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.62) 0%,
-    rgba(0, 0, 0, 0.58) 40%,
-    rgba(0, 0, 0, 0.6) 70%,
-    rgba(0, 0, 0, 0.65) 100%
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.74) 40%,
+    rgba(0, 0, 0, 0.76) 70%,
+    rgba(0, 0, 0, 0.8) 100%
   );
   pointer-events: none;
 }
@@ -59,4 +60,3 @@
   );
   pointer-events: none;
 }
-

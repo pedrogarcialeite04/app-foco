@@ -19,7 +19,6 @@
     overlay.setAttribute("aria-hidden", "false");
     toggleBtn.setAttribute("aria-expanded", "true");
     toggleBtn.setAttribute("aria-label", "Fechar menu");
-    document.body.style.overflow = "hidden";
   }
 
   function closeMenu() {
@@ -30,7 +29,6 @@
     overlay.setAttribute("aria-hidden", "true");
     toggleBtn.setAttribute("aria-expanded", "false");
     toggleBtn.setAttribute("aria-label", "Abrir menu");
-    document.body.style.overflow = "";
   }
 
   function toggleMenu() {

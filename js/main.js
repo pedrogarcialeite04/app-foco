@@ -107,7 +107,6 @@ function showConfirmRemoveModal(taskLabel, taskIndex) {
 
   const close = () => {
     backdrop.remove();
-    document.body.style.overflow = "";
   };
 
   backdrop.querySelector(".modal-btn-cancel").addEventListener("click", () => close());
@@ -124,7 +123,6 @@ function showConfirmRemoveModal(taskLabel, taskIndex) {
   });
 
   document.body.appendChild(backdrop);
-  document.body.style.overflow = "hidden";
   backdrop.querySelector(".modal-btn-cancel").focus();
 }
 

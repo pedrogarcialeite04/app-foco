@@ -254,8 +254,13 @@
   line-height: 1.4;
   letter-spacing: 0.03em;
   background: var(--glass-bg);
+  /* Garantir que o nome da atividade nunca seja cortado, em nenhuma largura */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  word-break: break-word;
   padding: var(--space-xl) var(--space-2xl) var(--space-xl) calc(var(--space-2xl) + 0.5rem);
   min-height: 132px;
 }
