@@ -103,7 +103,7 @@
     line-height: var(--ss-line-body);
     letter-spacing: var(--ss-letter-body);
     padding: var(--ss-space-2) var(--ss-space-3);
-    text-align: center;
+    text-align: left;
   }
 
   /* ——— Navegação semanal: centralizada ——— */
@@ -160,8 +160,8 @@
     min-height: 4.5rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .cell-day {
