@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- Página de informações para uso do sistema (app.html). -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Informações — FOCO</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/background.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/landing/landing.css">
+  <link rel="stylesheet" href="css/landing/informacoes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/small-screen.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="js/config.js"></script>
+</head>
+<body class="page-landing page-informacoes">
+  <div class="bg-cinematic" aria-hidden="true">
+    <div class="bg-cinematic__image"></div>
+    <div class="bg-cinematic__overlay"></div>
+  </div>
+
+  <nav class="topbar" role="navigation" aria-label="Navegação principal">
+    <div class="topbar__inner">
+      <a href="index.html" class="topbar__brand" aria-label="Voltar à página inicial">DEVPEDRO</a>
+      <ul class="topbar__links">
+        <li><a href="informacoes.html" class="topbar__link topbar__link--active" aria-current="page">Informações</a></li>
+        <li><a href="index.html" class="topbar__link">Início</a></li>
+      </ul>
+      <a href="index.html#login" class="btn-entrar btn-entrar--topbar" aria-label="Ir para login">Entrar no app</a>
+    </div>
+  </nav>
+
+  <main class="info" role="main">
+    <header class="info__header">
+      <h1 class="info__title">Informações para uso do sistema</h1>
+      <p class="info__lead">Tudo o que precisa para usar o FOCO (app de rotina e progresso).</p>
+    </header>
+
+    <div class="info__content">
+      <section class="info-section" aria-labelledby="sec-o-que-e">
+        <h2 id="sec-o-que-e" class="info-section__title">O que é o FOCO</h2>
+        <p>O FOCO é um sistema de acompanhamento de rotina e metas em formato de jogo: você marca o que fez na semana, define metas claras e vê tudo virar pontos e níveis. Cada conclusão de atividade rende <strong>+10 pontos</strong> e cada meta concluída gera um <strong>bónus extra</strong> no painel de jogo. Quanto mais consistente, mais o seu nível sobe.</p>
+      </section>
+
+      <section class="info-section" aria-labelledby="sec-acesso">
+        <h2 id="sec-acesso" class="info-section__title">Como acessar o sistema</h2>
+        <ol class="info-list info-list--numbered">
+          <li>Na <a href="index.html">página inicial</a>, clique em <strong>Entrar</strong> ou em <strong>Log In</strong>.</li>
+          <li>Digite seu email e senha (ou crie uma conta em <strong>Cadastre-se!</strong>).</li>
+          <li>Clique em <strong>Entrar</strong> ou <strong>Cadastrar</strong> — depois disso, utilize o botão <strong>Entrar</strong na página inicial para aceder ao <strong><a href="index.html">app</a></strong>.</li>
+        </ol>
+      </section>
+
+      <section class="info-section" aria-labelledby="sec-requisitos">
+        <h2 id="sec-requisitos" class="info-section__title">Requisitos</h2>
+        <ul class="info-list">
+          <li>Navegador moderno (Chrome, Firefox, Edge, Safari) com JavaScript ativo.</li>
+          <li><strong>Com conta (logado):</strong> suas marações e progresso são salvos no <strong>banco de dados</strong> do servidor (na nuvem). Assim seus dados ficam seguros e podem ser acessados de outro dispositivo ao fazer login. <strong>Sem conta:</strong> os dados ficam só no navegador (localStorage) e podem ser perdidos se você limpar os dados do site ou trocar de dispositivo.</li>
+        </ul>
+      </section>
+
+      <section class="info-section" aria-labelledby="sec-como-usar">
+        <h2 id="sec-como-usar" class="info-section__title">Como usar o app</h2>
+        <ul class="info-list">
+          <li><strong>Planilha semanal (Rotina):</strong> No app é apresentada uma tabela com as atividades nas linhas e os dias da semana (Seg–Dom) nas colunas.</li>
+          <li><strong>Marcar / desmarcar:</strong> Clique na célula do dia em que concluiu a atividade para marcar. Clique de novo na mesma célula para desmarcar. Cada marcação = <strong>+10 pontos</strong> na sua pontuação.</li>
+          <li><strong>Navegação por semana:</strong> Use os botões <strong>‹</strong> e <strong>›</strong> para mudar de semana e ver ou editar outras datas.</li>
+          <li><strong>Atividades disponíveis (padrão):</strong> Trabalho, Academia, Estudos, Leitura, Faculdade — e pode adicionar novas actividades no próprio app.</li>
+          <li><strong>Definir metas:</strong> Na página <em>Definir metas</em> você escreve metas em formato de cartões (cards). Cada meta pode ser concluída, reaberta, editada ou excluída.</li>
+          <li><strong>Bónus por meta concluída:</strong> sempre que concluir uma meta, o sistema soma automaticamente um bónus de pontos ao painel de jogo, reforçando o impacto das suas metas na sua evolução.</li>
+        </ul>
+      </section>
+
+      <section class="info-section" aria-labelledby="sec-pontos">
+        <h2 id="sec-pontos" class="info-section__title">Pontos e níveis</h2>
+        <ul class="info-list">
+          <li>Cada célula marcada na rotina = <strong>+10 pontos</strong>.</li>
+          <li>Cada meta concluída na página de metas gera um <strong>bónus adicional</strong> de pontos, que é somado à mesma pontuação usada no app principal.</li>
+          <li>Os pontos acumulam e determinam o seu <strong>nível</strong>. O painel de jogo (no app e na página de metas) mostra pontos actuais, nível e uma barra de progresso para o próximo nível.</li>
+          <li>Limiares de pontos por nível: 0 → Nível 1 (Iniciante), 100 → 2 (Em progresso), 250 → 3 (Focado), 500 → 4 (Disciplinado), 1000 → 5 (Máquina), 2000 → 6 (Expert), 3500 → 7 (Mestre), 5000 → 8 (Campeão), 7500 → 9 (Lenda), 10000 → 10 (Imortal).</li>
+        </ul>
+      </section>
+
+      <section class="info-section" aria-labelledby="sec-dados">
+        <h2 id="sec-dados" class="info-section__title">Onde os dados ficam salvos</h2>
+        <p><strong>Logado:</strong> a sua rotina (marcações, actividades, pontos e bónus de metas) é guardada no <strong>banco de dados</strong> (MongoDB) no servidor. Os dados estão na nuvem e vinculados à sua conta — pode abrir o app noutro telemóvel ou computador e continuar de onde parou. <strong>Sem login:</strong> tudo fica apenas no navegador do aparelho que está a usar; ao limpar os dados do site ou trocar de dispositivo, o progresso não é recuperado. Para garantir que nada se perca, crie uma conta e entre no app antes de usar.</p>
+      </section>
+
+      <div class="info__cta">
+        <a href="index.html#login" class="btn-entrar">Abrir o app FOCO</a>
+        <a href="index.html" class="info__back">Voltar à página inicial</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script src="js/landing/informacoes.js"></script>
+</body>
+</html>

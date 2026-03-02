@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- Página Definir metas — mesmo design do app, conteúdo é a área de metas. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FOCO — Definir metas</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/background.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/social.css">
+  <link rel="stylesheet" href="css/app-menu.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/small-screen.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="js/config.js"></script>
+</head>
+<body class="page-app page-metas">
+  <div class="bg-cinematic" aria-hidden="true">
+    <div class="bg-cinematic__image"></div>
+    <div id="particles-3d" class="particles-3d" aria-hidden="true"></div>
+    <div class="bg-cinematic__overlay"></div>
+  </div>
+  <div class="app">
+    <header class="header app-header" role="banner">
+      <button type="button" class="header__hamburger js-app-menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="app-menu-drawer" id="app-menu-toggle">
+        <span class="header__hamburger-bar"></span>
+        <span class="header__hamburger-bar"></span>
+        <span class="header__hamburger-bar"></span>
+      </button>
+      <div class="brand">
+        <h1 class="logo"><a href="index.html" class="logo__link" aria-label="Voltar à página inicial">FOCO</a></h1>
+        <p class="tagline">Defina suas metas e mantenha o foco.</p>
+      </div>
+    </header>
+
+    <div class="app-menu-overlay js-app-menu-overlay" id="app-menu-overlay" aria-hidden="true"></div>
+    <nav class="app-menu-drawer" id="app-menu-drawer" aria-label="Menu principal" aria-hidden="true">
+      <div class="app-menu-drawer__header">
+        <span class="app-menu-drawer__title">Menu</span>
+        <button type="button" class="app-menu-drawer__close js-app-menu-toggle" aria-label="Fechar menu">×</button>
+      </div>
+      <ul class="app-menu-drawer__list">
+        <li>
+          <a href="metas.html" class="app-menu-drawer__item app-menu-drawer__item--active">
+            <span class="app-menu-drawer__icon" aria-hidden="true"></span>
+            Definir metas
+          </a>
+        </li>
+        <li>
+          <a href="app.html" class="app-menu-drawer__item">
+            <span class="app-menu-drawer__icon" aria-hidden="true"></span>
+            Rotina
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <aside class="game-panel app-game-panel" aria-label="Painel de pontuação">
+      <h2 class="game-panel__title">Sua pontuação</h2>
+      <div class="game-stats">
+        <div class="stat stat-points">
+          <span class="stat-value" id="game-points">0</span>
+          <span class="stat-label">pontos</span>
+        </div>
+        <div class="stat stat-level">
+          <span class="stat-value" id="game-level">1</span>
+          <span class="stat-label">nível</span>
+          <span class="stat-level-name" id="game-level-name">Iniciante</span>
+        </div>
+      </div>
+      <div class="level-progress">
+        <div class="level-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="level-progress-bar">
+          <span class="level-progress-fill" id="level-progress-fill"></span>
+        </div>
+        <p class="level-progress-text" id="level-progress-text">0 / 100 pts para o próximo nível</p>
+      </div>
+      <p class="game-message" id="game-message">A carregar…</p>
+    </aside>
+
+    <main class="main" role="main">
+      <section class="metas-section metas-section--centered" aria-label="Definir metas">
+        <div class="metas-section__card metas-section__card--form">
+          <h2 class="metas-section__title">Definir nova meta</h2>
+          <p class="metas-section__hint">Transforme seus objetivos em metas claras. Cada meta adicionada vira um card separado logo abaixo.</p>
+
+          <div class="metas-section__form">
+            <label for="metas-page-input" class="metas-section__label">Nova meta</label>
+            <textarea
+              id="metas-page-input"
+              class="metas-section__input"
+              rows="4"
+              placeholder="Ex.: Completar 5 dias de academia esta semana"
+              maxlength="500"
+            ></textarea>
+            <div class="metas-section__actions">
+              <button type="button" class="metas-section__btn metas-section__btn--primary js-metas-page-add">Adicionar meta</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="metas-section__card metas-section__card--list">
+          <h2 class="metas-section__title">Suas metas</h2>
+          <p class="metas-section__hint">Cada meta aparece em um card com as opções de concluir, reabrir, editar ou excluir. Nada fica misturado.</p>
+
+          <div class="metas-section__list" id="metas-list" aria-live="polite"></div>
+
+          <p class="metas-section__feedback js-metas-feedback" aria-live="polite" hidden></p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Aviso estilizado (toast) — substitui alertas do sistema -->
+    <div id="metas-toast" class="app-toast" role="alert" aria-live="polite" aria-atomic="true" hidden>
+      <p class="app-toast__message" id="metas-toast-message"></p>
+    </div>
+
+    <!-- Modal de confirmação (ex.: excluir meta) -->
+    <div id="metas-confirm-overlay" class="app-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="metas-confirm-title" aria-modal="true" hidden>
+      <div class="app-modal app-modal--confirm">
+        <h3 id="metas-confirm-title" class="app-modal__title">Confirmar</h3>
+        <p class="app-modal__message" id="metas-confirm-message"></p>
+        <div class="app-modal__actions">
+          <button type="button" class="app-modal__btn app-modal__btn--secondary js-metas-confirm-cancel">Cancelar</button>
+          <button type="button" class="app-modal__btn app-modal__btn--danger js-metas-confirm-ok">Excluir</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de edição (substitui prompt) -->
+    <div id="metas-edit-overlay" class="app-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="metas-edit-title" aria-modal="true" hidden>
+      <div class="app-modal app-modal--edit">
+        <h3 id="metas-edit-title" class="app-modal__title">Editar meta</h3>
+        <label for="metas-edit-input" class="app-modal__label">Texto da meta</label>
+        <textarea id="metas-edit-input" class="app-modal__input" rows="3" maxlength="500"></textarea>
+        <div class="app-modal__actions">
+          <button type="button" class="app-modal__btn app-modal__btn--secondary js-metas-edit-cancel">Cancelar</button>
+          <button type="button" class="app-modal__btn app-modal__btn--primary js-metas-edit-ok">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+      <p class="footer__text">Seus dados ficam salvos no navegador e, quando você está logado, na nuvem. Continue jogando!</p>
+      <nav class="social-nav" aria-label="Redes sociais">
+        <span class="social-nav__label">Redes sociais</span>
+        <ul class="social-icons example-2">
+          <li class="icon-content">
+            <a href="https://www.linkedin.com/in/pedrogarcia-tech/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" data-social="linkedin">
+              <div class="filled"></div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" fill="currentColor"></path></svg>
+            </a>
+            <div class="tooltip">LinkedIn</div>
+          </li>
+          <li class="icon-content">
+            <a href="https://github.com/pedrogarcialeite04" target="_blank" rel="noopener noreferrer" aria-label="GitHub" data-social="github">
+              <div class="filled"></div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" fill="currentColor"></path></svg>
+            </a>
+            <div class="tooltip">GitHub</div>
+          </li>
+          <li class="icon-content">
+            <a href="https://www.instagram.com/pedrocadev" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-social="instagram">
+              <div class="filled"></div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" fill="currentColor"></path></svg>
+            </a>
+            <div class="tooltip">Instagram</div>
+          </li>
+          <li class="icon-content">
+            <a href="https://www.tiktok.com/@pedrogarciadev" target="_blank" rel="noopener noreferrer" aria-label="TikTok" data-social="tiktok">
+              <div class="filled"></div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+            <div class="tooltip">TikTok</div>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script type="module" src="js/particles3d.js"></script>
+  <script src="js/app-menu.js"></script>
+  <script type="module" src="js/metas-main.js"></script>
+  <script src="js/metas-page.js"></script>
+</body>
+</html>

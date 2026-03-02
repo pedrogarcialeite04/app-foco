@@ -1,0 +1,165 @@
+/**
+ * FOCO — Página de informações (informacoes.html).
+ * Estilos do conteúdo e layout da página "Informações para uso do sistema".
+ */
+
+.page-informacoes .landing {
+  display: none;
+}
+
+.info {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: calc(4rem + var(--space-xl)) var(--space-lg) var(--space-2xl);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.info__header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.info__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  margin: 0 0 var(--space-md);
+  line-height: 1.3;
+}
+
+.info__lead {
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.info__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Estado inicial para GSAP ScrollTrigger (surgem ao rolar) */
+.info__header {
+  opacity: 0;
+}
+
+.info-section {
+  background: var(--color-bg-elevated, #0c0c12);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+}
+
+.info__cta {
+  opacity: 0;
+}
+
+.info-section__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-md);
+  letter-spacing: 0.03em;
+}
+
+.info-section p,
+.info-section li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 0 0 var(--space-sm);
+}
+
+.info-section p:last-child,
+.info-section li:last-child {
+  margin-bottom: 0;
+}
+
+.info-section a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.info-section a:hover {
+  color: var(--color-accent-hover);
+  border-bottom-color: var(--color-accent-hover);
+}
+
+.info-section code {
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background: var(--color-surface-solid);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
+
+.info-list {
+  list-style: disc;
+  padding-left: 1.35rem;
+  margin: 0;
+}
+
+.info-list--numbered {
+  list-style: decimal;
+}
+
+.info-list li {
+  margin-bottom: var(--space-sm);
+}
+
+.info__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.info__back {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.info__back:hover {
+  color: var(--color-accent);
+}
+
+/* Botão Entrar na topbar (reutiliza .btn-entrar da landing) */
+.btn-entrar--topbar {
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.9rem;
+}
+
+.topbar__link--active {
+  color: var(--color-accent);
+}
+
+.topbar__link--active:hover {
+  color: var(--color-accent-hover);
+}
+
+@media (max-width: 640px) {
+  .info {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .info-section {
+    padding: var(--space-md);
+  }
+}

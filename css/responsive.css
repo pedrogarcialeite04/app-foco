@@ -1,0 +1,572 @@
+/**
+ * FOCO — Responsivo e adaptável para mobile
+ * Android, iPhone, tablets: safe areas, touch targets 44px+, sem cortar botões.
+ * Design mantido; apenas adaptação de espaçamento e overflow.
+ */
+
+/* ========== Safe areas (notch, home indicator, bordas) ========== */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+/* Safe area aplicada nos containers (evita conteúdo sob notch/barra) */
+
+/* ========== Telas menores: nada cortado com "..." ou sobreposto ========== */
+@media (max-width: 768px) {
+  .cell-label,
+  .sheet thead th,
+  .brand .tagline,
+  .footer__text,
+  .week-nav__label,
+  .game-message,
+  .level-progress-text {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* ========== Base: scroll natural (vertical livre), sem blocos que travem ========== */
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+}
+
+/* ========== APP (app.html): layout adaptável ========== */
+@media (max-width: 768px) {
+  .app {
+    min-width: 0;
+    padding: var(--space-md) var(--space-md);
+    padding-top: max(var(--space-md), var(--safe-top));
+    padding-bottom: max(var(--space-lg), var(--safe-bottom));
+    padding-left: max(var(--space-md), var(--safe-left));
+    padding-right: max(var(--space-md), var(--safe-right));
+  }
+
+  .main,
+  .sheet-section {
+    min-width: 0;
+  }
+
+  .game-panel {
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .game-stats {
+    gap: var(--space-md);
+  }
+
+  .stat {
+    min-width: 0;
+  }
+
+  .level-progress-text {
+    font-size: 0.8rem;
+    word-break: break-word;
+  }
+
+  .game-message {
+    font-size: 0.875rem;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  /* Tabela: sem scroll; sempre 100% da largura; botão Adicionar encaixado na coluna */
+  .sheet-section {
+    overflow-x: hidden;
+    min-width: 0;
+  }
+  .sheet-wrapper {
+    padding: var(--space-lg) 0;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  .sheet {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    border-spacing: 0 var(--space-md);
+  }
+
+  /* Proporções mobile: Atividade 20%, 7 dias 66%, Add 14% (touch ~44px em 320px) */
+  .sheet th:first-child,
+  .sheet td:first-child {
+    width: 20%;
+  }
+  .sheet th:last-child,
+  .sheet td:last-child {
+    width: 14%;
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+    box-sizing: border-box;
+  }
+  .sheet th:not(:first-child):not(:last-child),
+  .sheet td:not(:first-child):not(:last-child) {
+    width: calc(66% / 7);
+  }
+
+  .sheet thead th.cell-add-col {
+    padding: var(--space-xs);
+  }
+
+  .sheet tbody td.cell-add-col-empty {
+    padding: var(--space-xs);
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .btn-add-item,
+  .btn-remove-item {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sheet-hint {
+    padding: var(--space-lg) 0 var(--space-md);
+    font-size: 0.8125rem;
+  }
+
+  .footer {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+    padding-bottom: max(var(--space-lg), var(--safe-bottom));
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: var(--space-sm) var(--space-sm);
+    padding-top: max(var(--space-sm), var(--safe-top));
+    padding-left: max(var(--space-sm), var(--safe-left));
+    padding-right: max(var(--space-sm), var(--safe-right));
+  }
+
+  .brand .tagline {
+    font-size: 0.85rem;
+  }
+
+  .game-panel {
+    padding: var(--space-sm);
+  }
+
+  .sheet {
+    border-spacing: 0 var(--space-sm);
+  }
+}
+
+/* ========== Touch targets mínimos 44px (WCAG / Apple HIG) ========== */
+@media (hover: none) and (pointer: coarse) {
+  .week-nav__btn {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .btn-add-item {
+    min-height: 48px;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .btn-remove-item {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .cell-day .neon-checkbox {
+    --size: 44px;
+    margin: var(--space-sm) auto;
+  }
+
+  .modal-btn,
+  .modal-btn-cancel,
+  .modal-btn-remove {
+    min-height: 44px;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .social-icons .icon-content a {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ========== LANDING (index.html): topbar e conteúdo ========== */
+@media (max-width: 640px) {
+  .topbar {
+    padding: var(--space-sm) var(--space-md);
+    padding-top: max(var(--space-sm), var(--safe-top));
+    padding-left: max(var(--space-md), var(--safe-left));
+    padding-right: max(var(--space-md), var(--safe-right));
+  }
+
+  .topbar__inner {
+    gap: var(--space-sm);
+  }
+
+  .topbar__link {
+    padding: var(--space-sm) var(--space-xs);
+  }
+
+  .landing {
+    padding: calc(3.5rem + var(--safe-top)) var(--space-md) var(--space-lg);
+    padding-bottom: max(var(--space-xl), var(--safe-bottom));
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar__brand {
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+  }
+
+  .landing {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+    gap: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  .landing__logo {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+  }
+}
+
+/* Log In / user-profile: área de toque adequada em mobile */
+@media (hover: none) and (pointer: coarse), (max-width: 640px) {
+  .user-profile {
+    min-width: 44px;
+    min-height: 44px;
+    width: auto;
+    height: 44px;
+    padding: 0 var(--space-md);
+    margin-left: var(--space-sm);
+  }
+
+  .user-profile-inner {
+    min-width: 0;
+    width: auto;
+    height: 40px;
+    padding: 0 var(--space-sm);
+  }
+
+  .btn-entrar {
+    min-height: 48px;
+    min-width: 140px;
+    padding: 0.95rem 1.5rem;
+  }
+}
+
+/* ========== Modais: cabem na viewport e scrollam ========== */
+.login-overlay,
+.support-overlay {
+  padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
+  padding-left: max(20px, var(--safe-left));
+  padding-right: max(20px, var(--safe-right));
+  padding-top: max(20px, var(--safe-top));
+  padding-bottom: max(20px, var(--safe-bottom));
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.login-overlay .login-box,
+.support-overlay .support-box {
+  max-height: calc(100vh - 40px - var(--safe-top) - var(--safe-bottom));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: auto;
+}
+
+@media (max-width: 480px) {
+  .login-overlay .login-box {
+    padding: 36px 20px 24px;
+    max-width: calc(100vw - var(--safe-left) - var(--safe-right) - 24px);
+  }
+
+  .support-overlay .support-box {
+    padding: 32px 20px 24px;
+    max-width: calc(100vw - var(--safe-left) - var(--safe-right) - 24px);
+  }
+}
+
+/* Botões de fechar dos modais: área de toque 44px e dentro da safe area */
+.login-box__close,
+.support-box__close {
+  min-width: 44px;
+  min-height: 44px;
+  top: max(12px, var(--safe-top));
+  right: max(12px, var(--safe-right));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .login-box__close {
+    top: max(8px, var(--safe-top));
+    right: max(8px, var(--safe-right));
+  }
+
+  .support-box__close {
+    top: max(8px, var(--safe-top));
+    right: max(8px, var(--safe-right));
+  }
+}
+
+/* ========== Navegação semanal: adaptar sem cortar ========== */
+@media (max-width: 768px) {
+  .week-nav__label {
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 400px) {
+  .week-nav {
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+  }
+
+  .week-nav__label {
+    font-size: 0.9rem;
+  }
+}
+
+/* ========== Footer e ícones sociais: sempre visíveis, nunca cortados ========== */
+.social-nav {
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  overflow: visible;
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.social-icons .icon-content {
+  display: block;
+  flex-shrink: 0;
+}
+
+.social-icons .icon-content a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.social-icons .icon-content a svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.footer {
+  overflow: visible;
+}
+
+.footer__text {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 480px) {
+  .footer {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .footer__text {
+    max-width: 100%;
+  }
+}
+
+/* ========== Tabela que encolhe em telas pequenas (sem rolagem horizontal) ========== */
+/* 768px: tabela 100% já aplicada acima; reduzir padding e fontes */
+@media (max-width: 768px) {
+  .cell {
+    min-height: 88px;
+    padding: var(--space-sm) var(--space-xs);
+  }
+
+  .cell-label {
+    min-height: 88px;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.9rem;
+  }
+
+  .sheet thead th {
+    padding: var(--space-sm) var(--space-md);
+    min-height: 56px;
+    font-size: 0.8125rem;
+  }
+
+  .sheet thead th.cell-corner {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.9rem;
+  }
+
+  .sheet thead th.cell-header {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+
+  .sheet thead th.cell-add-col {
+    padding: var(--space-xs);
+  }
+
+  .cell-day {
+    padding: var(--space-sm) var(--space-xs);
+  }
+
+  .sheet .cell-day .neon-checkbox {
+    --size: 34px;
+    margin: var(--space-xs) auto;
+  }
+
+  .btn-add-item {
+    min-height: 36px;
+    padding: 0 var(--space-xs);
+    font-size: 0.8rem;
+  }
+
+  .btn-add-item__text {
+    font-size: 1.15rem;
+  }
+}
+
+/* 480px: ainda mais compacto */
+@media (max-width: 480px) {
+  .cell {
+    min-height: 72px;
+    padding: var(--space-xs) 2px;
+  }
+
+  .cell-label {
+    min-height: 72px;
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8rem;
+  }
+
+  .cell-label[data-activity],
+  .cell-label[data-activity^="custom-"] {
+    padding-left: var(--space-sm);
+    border-left-width: 3px;
+  }
+
+  .sheet thead th {
+    padding: var(--space-xs) var(--space-sm);
+    min-height: 48px;
+    font-size: 0.75rem;
+  }
+
+  .sheet thead th.cell-corner {
+    font-size: 0.8rem;
+  }
+
+  .sheet thead th.cell-header {
+    font-size: 0.625rem;
+    padding: var(--space-xs) 2px;
+  }
+
+  .cell-day {
+    padding: var(--space-xs) 2px;
+  }
+
+  .sheet .cell-day .neon-checkbox {
+    --size: 28px;
+    margin: 2px auto;
+  }
+
+  .btn-add-item {
+    min-height: 32px;
+    padding: 0 var(--space-xs);
+    font-size: 0.75rem;
+  }
+
+  .btn-add-item__text {
+    font-size: 1rem;
+  }
+
+  .sheet thead th.cell-add-col {
+    padding: var(--space-xs);
+  }
+}
+
+/* 360px: mínimo para caber tudo (Seg–Dom + Atividade + Add) */
+@media (max-width: 360px) {
+  .cell {
+    min-height: 64px;
+    padding: 2px 1px;
+  }
+
+  .cell-label {
+    min-height: 64px;
+    padding: 2px var(--space-xs);
+    font-size: 0.7rem;
+  }
+
+  .sheet thead th {
+    padding: 2px var(--space-xs);
+    min-height: 40px;
+    font-size: 0.6875rem;
+  }
+
+  .sheet thead th.cell-header {
+    font-size: 0.5625rem;
+  }
+
+  .cell-day {
+    padding: 2px 1px;
+  }
+
+  .sheet .cell-day .neon-checkbox {
+    --size: 24px;
+  }
+
+  .btn-add-item {
+    min-height: 28px;
+    padding: 0 2px;
+    font-size: 0.75rem;
+  }
+
+  .btn-add-item__text {
+    font-size: 0.9rem;
+  }
+
+  .sheet thead th.cell-add-col {
+    padding: 2px;
+  }
+}

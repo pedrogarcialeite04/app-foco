@@ -1,0 +1,269 @@
+/**
+ * FOCO — Modal de Suporte (landing).
+ * Formulário de contacto + loader envelope (Uiverse.io by Shoh2008).
+ */
+
+/* Overlay e box do modal */
+.support-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.support-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.support-box {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 36px;
+  margin: 0;
+  background: var(--color-bg-elevated, #0c0c12);
+  border: 1px solid var(--color-border, rgba(0, 212, 255, 0.15));
+  border-radius: var(--radius-lg, 14px);
+  box-shadow: var(--shadow-md, 0 8px 32px rgba(0, 0, 0, 0.5)),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+  box-sizing: border-box;
+}
+
+.support-box__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted, #7a8299);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--radius-sm, 6px);
+  transition: color 0.2s, background 0.2s;
+}
+
+.support-box__close:hover {
+  color: var(--color-text, #e8ecf4);
+  background: var(--color-surface-hover, rgba(35, 38, 52, 0.85));
+}
+
+.support-box__title {
+  margin: 0 0 28px;
+  padding: 0;
+  color: var(--color-text, #e8ecf4);
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.support-box .user-box {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.support-box .user-box input,
+.support-box .user-box textarea {
+  width: 100%;
+  padding: 12px 0 8px;
+  font-size: 15px;
+  color: var(--color-text, #e8ecf4);
+  border: none;
+  border-bottom: 1px solid var(--color-border, rgba(0, 212, 255, 0.15));
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 0;
+}
+
+.support-box .user-box textarea {
+  min-height: 100px;
+  padding-top: 14px;
+}
+
+.support-box .user-box input::placeholder,
+.support-box .user-box textarea::placeholder {
+  color: transparent;
+}
+
+.support-box .user-box label {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  padding: 0;
+  font-size: 15px;
+  color: var(--color-text-muted, #7a8299);
+  pointer-events: none;
+  transition: 0.25s ease;
+}
+
+.support-box .user-box input:focus ~ label,
+.support-box .user-box input:not(:placeholder-shown) ~ label,
+.support-box .user-box input:valid ~ label,
+.support-box .user-box textarea:focus ~ label,
+.support-box .user-box textarea:not(:placeholder-shown) ~ label {
+  top: -6px;
+  left: 0;
+  color: var(--color-accent, #00d4ff);
+  font-size: 12px;
+}
+
+.support-box .support-box__submit-wrap {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.support-box .btn-send {
+  position: relative;
+  display: inline-block;
+  padding: 12px 28px;
+  font-weight: 600;
+  color: var(--color-bg, #050508);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: none;
+  border-radius: var(--radius-md, 10px);
+  background: var(--color-accent, #00d4ff);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.support-box .btn-send:hover:not(:disabled) {
+  background: var(--color-accent-hover, #33ddff);
+  transform: translateY(-1px);
+}
+
+.support-box .btn-send:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.support-box.support-box--sending .support-box__loader-wrap {
+  display: flex;
+}
+
+.support-box__loader-wrap {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 20px;
+}
+
+.support-box__loader-wrap p {
+  margin: 0;
+  color: var(--color-text-muted, #7a8299);
+  font-size: 14px;
+}
+
+/* From Uiverse.io by Shoh2008 — loader envelope */
+.support-loader {
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 40px 60px 30px 60px;
+  border-color: #3760C9 #96DDFC #96DDFC #36BBF7;
+  animation: envFloating 1s ease-in infinite alternate;
+}
+
+.support-loader::after {
+  content: "";
+  position: absolute;
+  right: 62px;
+  top: -40px;
+  height: 70px;
+  width: 50px;
+  background-image: linear-gradient(#fff 45px, transparent 0),
+    linear-gradient(#fff 45px, transparent 0),
+    linear-gradient(#fff 45px, transparent 0);
+  background-repeat: no-repeat;
+  background-size: 30px 4px;
+  background-position: 0px 11px, 8px 35px, 0px 60px;
+  animation: envDropping 0.75s linear infinite;
+}
+
+@keyframes envFloating {
+  0% {
+    transform: translate(-2px, -5px);
+  }
+  100% {
+    transform: translate(0, 5px);
+  }
+}
+
+@keyframes envDropping {
+  0% {
+    background-position: 100px 11px, 115px 35px, 105px 60px;
+    opacity: 1;
+  }
+  50% {
+    background-position: 0px 11px, 20px 35px, 5px 60px;
+  }
+  60% {
+    background-position: -30px 11px, 0px 35px, -10px 60px;
+  }
+  75%, 100% {
+    background-position: -30px 11px, -30px 35px, -30px 60px;
+    opacity: 0;
+  }
+}
+
+/* Mensagem de sucesso (após envio) */
+.support-box.support-box--success .support-box__form-wrap {
+  display: none;
+}
+
+.support-box.support-box--sending .support-box__form-wrap {
+  display: none;
+}
+
+.support-box.support-box--success .support-box__loader-wrap {
+  display: none;
+}
+
+.support-box__success-wrap {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  text-align: center;
+  padding: 20px;
+}
+
+.support-box.support-box--success .support-box__success-wrap {
+  display: flex;
+}
+
+.support-box__success-wrap p {
+  margin: 0 0 8px;
+  color: var(--color-success, #00ffaa);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.support-box__success-wrap span {
+  color: var(--color-text-muted, #7a8299);
+  font-size: 14px;
+}

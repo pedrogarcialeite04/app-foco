@@ -1,0 +1,682 @@
+/**
+ * FOCO — Componentes: planilha, navegação semanal, tabela
+ * Estilo moderno e profissional com glass, transições e hierarquia clara.
+ */
+
+/* ========== Seção da planilha (solta, sem quadro) ========== */
+.sheet-section {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+}
+
+/* ========== Navegação por semana ========== */
+.week-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  padding: var(--space-lg) 0;
+  box-sizing: border-box;
+}
+
+.week-nav__label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+  min-width: 220px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.week-nav__btn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-text);
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.week-nav__btn:hover:not(:disabled) {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+}
+
+.week-nav__btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.week-nav__btn:focus-visible {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.25);
+}
+
+.week-nav__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ========== Wrapper da tabela (sem scroll horizontal; tabela sempre cabe) ========== */
+.sheet-wrapper {
+  overflow-x: hidden;
+  overflow-y: visible;
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-2xl) 0;
+  box-sizing: border-box;
+}
+
+/* ========== Tabela (solta, sempre 100% do container, sem scroll) ========== */
+.sheet {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 var(--space-xl);
+  font-size: 1rem;
+  margin: 0 auto;
+  display: table;
+}
+
+.sheet th,
+.sheet td {
+  padding: 0;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  box-sizing: border-box;
+}
+
+.sheet th:not(:first-child),
+.sheet td:not(:first-child) {
+  border-left: 1px solid var(--color-border);
+}
+
+/* Canto superior esquerdo: sem borda à esquerda */
+.sheet thead th:first-child {
+  border-left: none;
+  border-radius: var(--radius-md) 0 0 0;
+}
+
+.sheet thead th:last-child {
+  border-radius: 0 var(--radius-md) 0 0;
+}
+
+.sheet thead th.cell-add-col {
+  padding: var(--space-sm);
+  vertical-align: middle;
+  text-align: center;
+}
+
+.sheet thead th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-align: left;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  letter-spacing: 0.03em;
+  border-color: var(--color-border);
+  min-height: 96px;
+  padding: var(--space-xl) var(--space-2xl);
+  box-shadow: 0 1px 0 var(--color-border);
+}
+
+.sheet thead th.cell-corner {
+  padding: var(--space-xl) var(--space-2xl);
+  font-size: 1.05rem;
+}
+
+.sheet thead th.cell-header {
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: var(--space-xl) var(--space-2xl);
+}
+
+.sheet tbody tr {
+  background: transparent;
+  transition: background var(--duration-normal) var(--ease-out);
+}
+
+.sheet tbody tr:nth-child(even) {
+  background: transparent;
+}
+
+.sheet tbody tr:hover {
+  background: transparent;
+}
+
+.sheet tbody tr:hover .cell-day {
+  background: rgba(0, 212, 255, 0.04);
+}
+
+.sheet tbody tr:nth-child(even):hover .cell-day {
+  background: rgba(0, 212, 255, 0.04);
+}
+
+/* Primeira e última célula da linha com cantos suaves (efeito linha-card) */
+.sheet tbody tr td:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.sheet tbody tr td:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ========== Células ========== */
+/* Proporções fixas em %: atividades 24%, 7 dias 68%/7, coluna Add 8% — sem min-width para caber em qualquer largura */
+.sheet th:first-child,
+.sheet td:first-child {
+  width: 24%;
+}
+
+.sheet th:last-child,
+.sheet td:last-child {
+  width: 8%;
+}
+
+.sheet th:not(:first-child):not(:last-child),
+.sheet td:not(:first-child):not(:last-child) {
+  width: calc(68% / 7);
+}
+
+.cell {
+  min-height: 132px;
+  padding: var(--space-xl) var(--space-xl);
+  box-sizing: border-box;
+}
+
+.cell-corner {
+  font-weight: 600;
+  font-size: 1rem;
+  background: var(--glass-bg);
+  padding: var(--space-lg) var(--space-xl);
+  letter-spacing: 0.02em;
+}
+
+.cell-header {
+  padding: var(--space-md) var(--space-2xl);
+  font-size: 0.8125rem;
+}
+
+.cell-day {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  padding: var(--space-xl) var(--space-xl);
+  transition: background var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.cell-day:focus-within {
+  background: var(--color-accent-soft);
+  box-shadow: inset 0 0 0 1px rgba(0, 212, 255, 0.2);
+}
+
+.cell-day:hover {
+  background: rgba(0, 212, 255, 0.06);
+}
+
+.cell-day .neon-checkbox {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.cell-day:hover .neon-checkbox {
+  transform: scale(1.06);
+}
+
+.cell-label {
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+  background: var(--glass-bg);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: var(--space-xl) var(--space-2xl) var(--space-xl) calc(var(--space-2xl) + 0.5rem);
+  min-height: 132px;
+}
+
+/* Indicador visual por atividade — barra colorida + fundo suave em toda a área do texto */
+.cell-label[data-activity="trabalho"] {
+  border-left: 4px solid #6366f1;
+  padding-left: calc(var(--space-xl) + 0.25rem);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.12), var(--glass-bg) 24px);
+  box-shadow: inset 0 0 32px rgba(99, 102, 241, 0.06);
+}
+
+.cell-label[data-activity="academia"] {
+  border-left: 4px solid #10b981;
+  padding-left: calc(var(--space-xl) + 0.25rem);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: linear-gradient(to right, rgba(16, 185, 129, 0.12), var(--glass-bg) 24px);
+  box-shadow: inset 0 0 32px rgba(16, 185, 129, 0.06);
+}
+
+.cell-label[data-activity="estudos"] {
+  border-left: 4px solid #f59e0b;
+  padding-left: calc(var(--space-xl) + 0.25rem);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: linear-gradient(to right, rgba(245, 158, 11, 0.12), var(--glass-bg) 24px);
+  box-shadow: inset 0 0 32px rgba(245, 158, 11, 0.06);
+}
+
+.cell-label[data-activity="leitura"] {
+  border-left: 4px solid #8b5cf6;
+  padding-left: calc(var(--space-xl) + 0.25rem);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: linear-gradient(to right, rgba(139, 92, 246, 0.12), var(--glass-bg) 24px);
+  box-shadow: inset 0 0 32px rgba(139, 92, 246, 0.06);
+}
+
+.cell-label[data-activity="faculdade"] {
+  border-left: 4px solid #06b6d4;
+  padding-left: calc(var(--space-xl) + 0.25rem);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: linear-gradient(to right, rgba(6, 182, 212, 0.12), var(--glass-bg) 24px);
+  box-shadow: inset 0 0 32px rgba(6, 182, 212, 0.06);
+}
+
+/* Atividades customizadas (barra neutra + fundo suave) */
+.cell-label[data-activity^="custom-"] {
+  border-left: 4px solid var(--color-accent);
+  padding-left: calc(var(--space-xl) + 0.25rem);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: linear-gradient(to right, var(--color-accent-soft), var(--glass-bg) 24px);
+  box-shadow: inset 0 0 32px var(--color-accent-soft);
+}
+
+/* ========== Botão Add item (encaixado na célula, sem overflow) ========== */
+.btn-add-item {
+  width: 100%;
+  max-width: 100%;
+  min-height: 40px;
+  padding: 0 var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  background: var(--glass-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.btn-add-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.btn-add-item:hover {
+  background: var(--color-accent-soft);
+  border-color: rgba(0, 212, 255, 0.35);
+  box-shadow: 0 0 24px var(--color-accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.btn-add-item:hover::before {
+  opacity: 1;
+}
+
+.btn-add-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 16px var(--color-accent-glow);
+}
+
+.btn-add-item:focus-visible {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.35);
+}
+
+.btn-add-item__text {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25em;
+  height: 1.25em;
+  min-width: 1em;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  color: var(--color-accent);
+  text-shadow: 0 0 12px var(--color-accent-glow);
+  transition: transform var(--duration-fast) var(--ease-out),
+    text-shadow var(--duration-fast) var(--ease-out);
+}
+
+.btn-add-item:hover .btn-add-item__text {
+  text-shadow: 0 0 20px var(--color-accent-glow), 0 0 8px rgba(0, 212, 255, 0.6);
+  transform: scale(1.1);
+}
+
+.btn-add-item:active .btn-add-item__text {
+  transform: scale(0.95);
+}
+
+/* Botão remover: ícone de lixeira apenas */
+.btn-remove-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.btn-remove-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.btn-remove-item__icon svg {
+  display: block;
+}
+
+.btn-remove-item:hover {
+  background: rgba(248, 113, 113, 0.2);
+  border-color: var(--color-danger);
+  box-shadow: 0 0 20px var(--color-danger-glow);
+}
+
+.btn-remove-item:active {
+  transform: scale(0.95);
+}
+
+.btn-remove-item:focus-visible {
+  outline: none;
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 2px var(--color-danger-glow);
+}
+
+/* Célula vazia da coluna Add (alinhamento das linhas) */
+.cell-add-col-empty {
+  background: transparent;
+  border-left: 1px solid var(--color-border);
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ========== Linha de rascunho (nova atividade) ========== */
+.sheet-draft-row .cell-label-draft {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--glass-bg);
+  vertical-align: middle;
+}
+
+.cell-label-input {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  box-sizing: border-box;
+}
+
+.cell-label-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.cell-label-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-soft);
+}
+
+.cell-day-draft {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cell-day-draft-placeholder {
+  display: block;
+  width: 100%;
+  min-height: 38px;
+}
+
+/* Efeito flutuante de pontos (+10) ao marcar uma célula */
+.points-float {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -20%);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-success);
+  text-shadow: 0 0 12px var(--color-success-glow);
+  pointer-events: none;
+  opacity: 0;
+  animation: foco-points-float-up 0.7s var(--ease-out) forwards;
+}
+
+@keyframes foco-points-float-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10%);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+}
+
+/* ========== Modal de confirmação (remover atividade) ========== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: foco-modal-in 0.2s var(--ease-out);
+}
+
+@keyframes foco-modal-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-2xl);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  animation: foco-modal-dialog-in 0.25s var(--ease-out);
+}
+
+@keyframes foco-modal-dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.02em;
+}
+
+.modal-text {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: var(--space-xl);
+}
+
+.modal-text strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.modal-btn-cancel {
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-border);
+}
+
+.modal-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
+}
+
+.modal-btn-remove {
+  color: #fff;
+  background: var(--color-danger);
+  border: 1px solid transparent;
+}
+
+.modal-btn-remove:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 20px var(--color-danger-glow);
+}
+
+.modal-btn-remove:focus-visible,
+.modal-btn-cancel:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent-soft);
+}
+
+/* ========== Dica inferior (solta) ========== */
+.sheet-hint {
+  width: 100%;
+  padding: var(--space-2xl) 0 var(--space-xl);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  box-sizing: border-box;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* Scroll horizontal em telas pequenas — barra oculta (igual à página) */
+.sheet-wrapper {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sheet-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========== Metas: cards centralizados ========== */
+.metas-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.metas-section--centered {
+  align-items: center;
+}
+
+.metas-section--centered .metas-section__card {
+  width: 100%;
+  max-width: 720px;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- Página Sobre — Conteúdo e estilos isolados: css/landing/sobre.css, js/landing/sobre.js -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sobre — FOCO</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/background.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/landing/landing.css">
+  <link rel="stylesheet" href="css/landing/sobre.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/small-screen.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="js/config.js"></script>
+</head>
+<body class="page-landing page-sobre">
+  <div class="bg-cinematic" aria-hidden="true">
+    <div class="bg-cinematic__image"></div>
+    <div class="bg-cinematic__overlay"></div>
+  </div>
+
+  <nav class="topbar" role="navigation" aria-label="Navegação principal">
+    <div class="topbar__inner">
+      <a href="index.html" class="topbar__brand" aria-label="Voltar à página inicial">DEVPEDRO</a>
+      <ul class="topbar__links">
+        <li><a href="index.html" class="topbar__link">Início</a></li>
+        <li><a href="informacoes.html" class="topbar__link">Informações</a></li>
+        <li><a href="sobre.html" class="topbar__link topbar__link--active" aria-current="page">Sobre</a></li>
+      </ul>
+      <a href="index.html#login" class="btn-entrar btn-entrar--topbar" aria-label="Ir para login">Entrar</a>
+    </div>
+  </nav>
+
+  <main class="sobre" role="main">
+    <header class="sobre__hero js-sobre-hero">
+      <p class="sobre__badge" aria-hidden="true">Bem-vindo</p>
+      <h1 class="sobre__title">Sobre o FOCO</h1>
+      <p class="sobre__tagline">Olá! Meu nome é <strong>Pedro Garcia</strong> e criei o FOCO para transformar rotina e metas em um jogo visual de progresso real.</p>
+    </header>
+
+    <section class="sobre__card js-sobre-card" aria-labelledby="sobre-conteudo-title">
+      <h2 id="sobre-conteudo-title" class="visually-hidden">Conteúdo sobre o projeto</h2>
+      <div class="sobre__body">
+        <p class="sobre__lead">Criei este sistema para ajudar <strong>estudantes, trabalhadores e todas as pessoas dedicadas</strong> a enxergar o próprio progresso de forma clara. Muitas vezes sentimos que não estamos a evoluir — na maior parte das vezes é falta de <em>visibilidade</em>, não de esforço.</p>
+        <p>Com o FOCO você organiza a sua <strong>rotina semanal</strong> em uma planilha simples, define <strong>metas em cartões</strong> e vê tudo isso virar pontos, níveis e mensagens motivadoras. Assim fica mais fácil entender onde concentrar energia, celebrar cada meta concluída e, o mais importante, <strong>sentir orgulho</strong> quando olha para o painel e vê o seu nível a subir.</p>
+        <p class="sobre__outro">O FOCO está em constante melhoria, sempre com foco em trazer clareza e motivação para o seu dia-a-dia. Dúvidas ou sugestões? Mande uma mensagem <a href="index.html#suporte" class="sobre__link">na aba de Suporte</a>. Estou por aqui. E aproveite o sistema — foi feito pensando em você.</p>
+      </div>
+    </section>
+
+    <footer class="sobre__ctas js-sobre-ctas">
+      <a href="index.html#suporte" class="sobre__btn sobre__btn--secondary">Suporte</a>
+      <a href="index.html#login" class="sobre__btn sobre__btn--primary">Entrar no app</a>
+      <a href="index.html" class="sobre__btn sobre__btn--ghost">Voltar ao início</a>
+    </footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script src="js/landing/sobre.js"></script>
+</body>
+</html>

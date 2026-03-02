@@ -1,0 +1,242 @@
+/**
+ * FOCO — Modal de login/registro (landing).
+ * Base: Uiverse.io by glisovic01.
+ */
+
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.login-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.login-overlay .login-box {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  margin: 0;
+  transform: translateY(0);
+  background: rgba(0, 0, 0, 0.92);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.login-box__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.login-box__close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.login-box [data-login-view] {
+  display: none;
+}
+
+.login-box [data-login-view].is-active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.login-box [data-login-view].is-active form {
+  width: 100%;
+  max-width: 100%;
+}
+
+.login-box p:first-of-type {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  width: 100%;
+}
+
+.login-box .user-box {
+  position: relative;
+  width: 100%;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  outline: none;
+  background: transparent;
+}
+
+.login-box .user-box input::placeholder {
+  color: transparent;
+}
+
+.login-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:not(:placeholder-shown) ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #fff;
+  font-size: 12px;
+}
+
+.login-box .login-box__submit-wrap {
+  margin-top: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-box .btn-submit {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  letter-spacing: 3px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.login-box .btn-submit:hover {
+  background: #fff;
+  color: #272727;
+  border-radius: 5px;
+}
+
+.login-box .btn-submit span {
+  position: absolute;
+  display: block;
+}
+
+.login-box .btn-submit span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff);
+  animation: login-btn-anim1 1.5s linear infinite;
+}
+
+@keyframes login-btn-anim1 {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.login-box .btn-submit span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #fff);
+  animation: login-btn-anim2 1.5s linear infinite;
+  animation-delay: 0.375s;
+}
+
+@keyframes login-btn-anim2 {
+  0% { top: -100%; }
+  50%, 100% { top: 100%; }
+}
+
+.login-box .btn-submit span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #fff);
+  animation: login-btn-anim3 1.5s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes login-btn-anim3 {
+  0% { right: -100%; }
+  50%, 100% { right: 100%; }
+}
+
+.login-box .btn-submit span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #fff);
+  animation: login-btn-anim4 1.5s linear infinite;
+  animation-delay: 1.125s;
+}
+
+@keyframes login-btn-anim4 {
+  0% { bottom: -100%; }
+  50%, 100% { bottom: 100%; }
+}
+
+.login-box .login-box__footer {
+  margin-top: 24px;
+  color: #aaa;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.login-box .login-box__footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.login-box .login-box__footer a:hover {
+  color: #aaa;
+}
