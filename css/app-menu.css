@@ -844,3 +844,23 @@
   color: #fff;
   box-shadow: 0 0 20px var(--color-danger-glow);
 }
+
+/* Modais gerais (metas): cabem na viewport e permitem scroll em telas pequenas */
+.app-modal-overlay {
+  padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
+  padding-left: max(20px, var(--safe-left));
+  padding-right: max(20px, var(--safe-right));
+  padding-top: max(20px, var(--safe-top));
+  padding-bottom: max(20px, var(--safe-bottom));
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-modal {
+  max-height: calc(100vh - 40px - var(--safe-top) - var(--safe-bottom));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: auto;
+}
