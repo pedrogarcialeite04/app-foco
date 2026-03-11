@@ -28,12 +28,9 @@
     savedScrollY = window.scrollY || window.pageYOffset;
     overlay.classList.add("is-open");
     overlay.setAttribute("aria-hidden", "false");
+    // Bloqueia apenas o scroll de fundo para o modal de suporte,
+    // sem travar o body em posição fixa (melhor para touch e desktop).
     document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = "-" + savedScrollY + "px";
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
     closeBtn?.focus();
   }
 
@@ -41,12 +38,8 @@
     overlay.classList.remove("is-open");
     overlay.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.left = "";
-    document.body.style.right = "";
-    document.body.style.width = "";
-    window.scrollTo(0, savedScrollY);
+    // Mantém posição de scroll; como não fixamos o body,
+    // não precisamos restaurar manualmente.
     resetState();
     openBtn?.focus();
   }
