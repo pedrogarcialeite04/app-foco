@@ -37,3 +37,27 @@
     }
   );
 })();
+
+/**
+ * Pré-aquece a API assim que a landing carregar,
+ * para que o primeiro login não pegue o backend/Mongo "frio".
+ */
+(function warmupApi() {
+  try {
+    if (typeof window === "undefined" || typeof fetch === "undefined") return;
+
+    let base = "";
+    if (window.FOCO_API_URL) {
+      base = window.FOCO_API_URL;
+    } else if (window.location.port === "5500") {
+      base = "http://localhost:3001";
+    } else {
+      base = window.location.origin || "";
+    }
+
+    if (!base) return;
+
+    const url = `${base.replace(/\/$/, "")}/health`;
+    fetch(url, { method: "GET", cache: "no-store", mode: "cors" }).catch(() => {});
+  } catch (_) {}
+})();
