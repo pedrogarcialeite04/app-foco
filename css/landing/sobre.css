@@ -1,0 +1,247 @@
+/**
+ * FOCO — Estilos exclusivos da página Sobre (sobre.html).
+ * Hero, card de conteúdo e CTAs. Não afeta outras páginas.
+ */
+
+/* --- Esconder conteúdo da landing na página Sobre --- */
+.page-sobre .landing {
+  display: none;
+}
+
+/* --- Container principal --- */
+.sobre {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: calc(4rem + var(--space-xl)) var(--space-lg) 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* --- Hero --- */
+.sobre__hero {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+}
+
+.sobre__badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-lg);
+}
+
+.sobre__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  margin: 0 0 var(--space-md);
+  line-height: 1.2;
+}
+
+.sobre__tagline {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 38ch;
+  margin-inline: auto;
+}
+
+.sobre__tagline strong {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* --- Card de conteúdo --- */
+.sobre__card {
+  width: 100%;
+  position: relative;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-xl) var(--space-xl) calc(var(--space-xl) + 4px);
+  margin-bottom: var(--space-2xl);
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  opacity: 0;
+}
+
+/* Barra lateral accent (detalhe visual) */
+.sobre__card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--space-lg);
+  bottom: var(--space-lg);
+  width: 3px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    180deg,
+    var(--color-accent) 0%,
+    var(--color-level) 100%
+  );
+  opacity: 0.85;
+}
+
+.sobre__body {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.sobre__body p {
+  margin: 0 0 var(--space-lg);
+}
+
+.sobre__body p:last-child {
+  margin-bottom: 0;
+}
+
+.sobre__lead {
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.sobre__body strong {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.sobre__body em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--color-level);
+}
+
+.sobre__outro {
+  color: var(--color-text-muted);
+  font-size: 0.98em;
+}
+
+.sobre__link {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 0.08em;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.sobre__link:hover {
+  color: var(--color-accent-hover);
+  border-bottom-color: var(--color-accent-hover);
+}
+
+/* --- CTAs --- */
+.sobre__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: auto;
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+  opacity: 0;
+}
+
+.sobre__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: color 0.2s, background 0.2s, border-color 0.2s, transform 0.15s ease;
+}
+
+.sobre__btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.sobre__btn--primary {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.sobre__btn--primary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+
+.sobre__btn--secondary {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: transparent;
+}
+
+.sobre__btn--secondary:hover {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.sobre__btn--ghost {
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+  background: transparent;
+}
+
+.sobre__btn--ghost:hover {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+
+/* Link ativo na topbar (página Sobre) */
+.page-sobre .topbar__link--active {
+  color: var(--color-accent);
+}
+
+/* --- Responsivo --- */
+@media (max-width: 640px) {
+  .sobre {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .sobre__card {
+    padding: var(--space-lg) var(--space-lg) var(--space-lg) calc(var(--space-lg) + 4px);
+  }
+
+  .sobre__card::before {
+    top: var(--space-md);
+    bottom: var(--space-md);
+  }
+
+  .sobre__ctas {
+    flex-direction: column;
+  }
+
+  .sobre__btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}

@@ -1,0 +1,90 @@
+/**
+ * FOCO — Reset e base
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Scroll fluido: documento é o container de scroll, sem travar em “blocos” */
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Esconde barra de rolagem mantendo scroll funcional */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  line-height: 1.5;
+  position: relative;
+  overflow-x: hidden;
+  /* Scroll padrão; pode ser ajustado por página específica */
+  overflow-y: visible;
+}
+
+/* app.html: garante scroll vertical fluido, inclusive em mobile (touch) */
+body.page-app {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+/* Landing e páginas de conteúdo: mesmo comportamento de scroll seguro em mobile e desktop */
+body.page-landing,
+body.page-informacoes,
+body.page-sobre {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  /* Garante que o scroll do documento funcione em toda a área (header incluído) */
+  pointer-events: auto;
+}
+
+/* Estado inicial para animações GSAP (evita flash) */
+.app-header {
+  opacity: 0;
+  transform: translateY(-28px);
+}
+
+.app-game-panel {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Linhas da tabela: animadas só na entrada (gsap.from), sem estado inicial aqui */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
